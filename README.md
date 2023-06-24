@@ -24,6 +24,10 @@ or the tree of only a specific issue.
 
 See attached screenshots below:
 
+![All Connected Issues](img/all-connected-issues.png)
+
+![One Specific Issue](img/one-specific-issue.png)
+
 ## Legend
 
 * The red issues are issues that are blocking other issues.
