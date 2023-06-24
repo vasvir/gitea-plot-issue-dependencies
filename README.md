@@ -30,9 +30,9 @@ See attached screenshots below:
 
 ## Legend
 
-* The red issues are issues that are blocking other issues.
+* The red issues are blocking other issues.
 * The green issues are the closed issues.
-* The white issues are non blocking issues.
+* The white issues are normal, non blocking issues.
 
 ## Usage
 
