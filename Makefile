@@ -1,5 +1,5 @@
 RMDIR = rm -rf
-GRAPHVIZ?= dot
+GRAPHVIZ?= sfdp -Goverlap=false -Gconcentrate=true -Gsplines=true
 
 .ONESHELL:
 
@@ -52,7 +52,7 @@ gitea-issues.dot: gitea-issues.data
 			} else {
 				color = (i in dependencies) ? "fontcolor=white fillcolor=red" : "fillcolor=white";
 			}
-			print "  \"" nodes[i] "\" [shape=box style=filled " color " URL=\"$(BASE_URL)/" i "\" target=_blank]";
+			print "  \"" nodes[i] "\" [style=filled " color " URL=\"$(BASE_URL)/" i "\" target=_blank]";
 		}
 		print "";
 
@@ -152,7 +152,7 @@ gitea-issue-$(ISSUE).dot: gitea-issues.data
 			} else {
 				color = (i in dependencies) ? "fontcolor=white fillcolor=red" : "fillcolor=white";
 			}
-			print "  \"" nodes[i] "\" [shape=box style=filled " color " URL=\"$(BASE_URL)/" i "\" target=_blank]";
+			print "  \"" nodes[i] "\" [style=filled " color " URL=\"$(BASE_URL)/" i "\" target=_blank]";
 		}
 		print "";
 
