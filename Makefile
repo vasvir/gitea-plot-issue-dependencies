@@ -1,5 +1,12 @@
 RMDIR = rm -rf
-GRAPHVIZ?= sfdp -Goverlap=false -Gconcentrate=true -Gsplines=true
+
+GRAPHVIZ_RATIO_MONITOR_4_3 = 0.7500
+GRAPHVIZ_RATIO_MONITOR_16_9 = 0.5625
+GRAPHVIZ_RATIO_A4_PORTRAIT = 1.5397
+GRAPHVIZ_RATIO_A4_LANDSCAPE = 0.6495
+GRAPHVIZ_RATIO ?= $(GRAPHVIZ_RATIO_A4_LANDSCAPE)
+GRAPHVIZ ?= dot -Gratio=$(GRAPHVIZ_RATIO)
+GRAPHVIZ ?= sfdp -Gratio=$(GRAPHVIZ_RATIO) -Goverlap=false -Gconcentrate=true -Gsplines=true
 
 .ONESHELL:
 
@@ -9,12 +16,12 @@ ifdef ISSUE
 all: gitea-issue-$(ISSUE).svg
 
 clean:
-	$(RM) gitea-issues.data gitea-issue-$(ISSUE).dot gitea-issue-$(ISSUE).svg
+	$(RM) gitea-issues.data gitea-issue-$(ISSUE).dot gitea-issue-$(ISSUE).svg gitea-issue-$(ISSUE).png
 else
 all: gitea-issues.svg
 
 clean:
-	$(RM) gitea-issues.data gitea-issues.dot gitea-issues.svg
+	$(RM) gitea-issues.data gitea-issues.dot gitea-issues.svg gitea-issues.png
 endif
 
 gitea-issues.data:
@@ -172,3 +179,9 @@ gitea-issues.svg: gitea-issues.dot
 
 gitea-issue-$(ISSUE).svg: gitea-issue-$(ISSUE).dot
 	$(GRAPHVIZ) -Tsvg -o $@ < $<;
+
+gitea-issues.png: gitea-issues.dot
+	$(GRAPHVIZ) -Tpng -o $@ < $<;
+
+gitea-issue-$(ISSUE).png: gitea-issue-$(ISSUE).dot
+	$(GRAPHVIZ) -Tpng -o $@ < $<;
