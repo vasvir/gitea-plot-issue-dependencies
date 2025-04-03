@@ -25,7 +25,7 @@ clean:
 endif
 
 gitea-issues.data:
-	@ssh $(HOST) 'mysql gitea -Ne "SELECT i1.\`index\`, i1.name, i1.is_closed, i2.\`index\`, i2.name, i2.is_closed FROM issue_dependency d, issue i1, issue i2 WHERE d.issue_id = i1.id AND d.dependency_id = i2.id;"' > $@;
+	@ssh $(HOST) 'mysql --defaults-group-suffix=-gitea -Ne "SELECT i1.\`index\`, i1.name, i1.is_closed, i2.\`index\`, i2.name, i2.is_closed FROM issue_dependency d, issue i1, issue i2 WHERE d.issue_id = i1.id AND d.dependency_id = i2.id;"' > $@;
 
 gitea-issues.dot: gitea-issues.data
 	@cat $< | awk -vFS='\t' 'BEGIN {
